@@ -1,0 +1,58 @@
+import satori from "satori";
+import { Resvg } from "@resvg/resvg-js";
+import postOgImage from "./og-templates/post";
+import siteOgImage from "./og-templates/site";
+
+const fetchFonts = async () => {
+  // Regular Font
+  const fontFileRegular = await fetch(
+    "https://www.1001fonts.com/download/font/ibm-plex-mono.regular.ttf"
+  );
+  const fontRegular = await fontFileRegular.arrayBuffer();
+
+  // Bold Font
+  const fontFileBold = await fetch(
+    "https://www.1001fonts.com/download/font/ibm-plex-mono.bold.ttf"
+  );
+  const fontBold = await fontFileBold.arrayBuffer();
+
+  return { fontRegular, fontBold };
+};
+
+const { fontRegular, fontBold } = await fetchFonts();
+
+const options = {
+  width: 1200,
+  height: 630,
+  embedFont: true,
+  fonts: [
+    {
+      name: "IBM Plex Mono",
+      data: fontRegular,
+      weight: 400,
+      style: "normal",
+    },
+    {
+      name: "IBM Plex Mono",
+      data: fontBold,
+      weight: 600,
+      style: "normal",
+    },
+  ],
+};
+
+function svgBufferToPngBuffer(svg) {
+  const resvg = new Resvg(svg);
+  const pngData = resvg.render();
+  return pngData.asPng();
+}
+
+export async function generateOgImageForPost(post) {
+  const svg = await satori(postOgImage(post), options);
+  return svgBufferToPngBuffer(svg);
+}
+
+export async function generateOgImageForSite() {
+  const svg = await satori(siteOgImage(), options);
+  return svgBufferToPngBuffer(svg);
+}

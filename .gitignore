@@ -20,3 +20,5 @@ yarn-error.log*
 #cypress
 cypress/videos
 cypress/screenshots
+
+src/website.json

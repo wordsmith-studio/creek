@@ -4,23 +4,23 @@ import Nav from '../components/Nav.astro';
 import HomeHeader from '../components/HomeHeader.astro';
 import Card from '../components/Card.astro';
 import Footer from '../components/Footer/Footer.astro'
+import { getCollection } from "astro:content";
+import { SITE } from "../config";
 
 interface MarkdownFrontmatter {
   date: number;
 }
 
-const title = 'Creek';
-const description = 'A Theme for Astro';
-const seoDescription = 'Creek is a theme for Astro static site generator';
+const title = SITE.title;
+const description = SITE.desc;
 
-const allPosts = await Astro.glob<MarkdownFrontmatter>('./posts/*.md');
-const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+const allPosts = await getCollection("blog");
 ---
 
 <html lang="en">
 
 <head>
-  <BaseHead title={title} description={seoDescription} />
+  <BaseHead title={title} description={description} />
 </head>
 
 <body class="bg-white text-black font-body leading-normal personality-casual">
@@ -30,7 +30,7 @@ const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valu
     <article class="max-w-6xl mx-auto px-3">
       <HomeHeader title={title} description={description} />
       <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8" data-test="articles-section">
-        {sortedPosts.map(p => <div class="col-span-1">
+        {allPosts.map(p => <div class="col-span-1">
           <Card post={p} />
         </div>)}
       </section>

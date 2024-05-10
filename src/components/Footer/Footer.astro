@@ -1,11 +1,12 @@
 ---
 import Squiggle from './Squiggle.astro'
 import Social from './Social.astro'
+import { SITE } from '../../config'
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="py-6 lg:py-12 text-center">
-  <div class="text-sm" data-test="footer-text">&copy;<script type="text/javascript"> document.write(new Date().getFullYear()); </script> Creek</div>
-  <Social />
+  <div class="text-sm" data-test="footer-text">&copy;{currentYear} {SITE.title}</div>
 </footer>
 
 <Squiggle />

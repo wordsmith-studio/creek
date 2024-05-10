@@ -1,0 +1,35 @@
+---
+import Nav from '../../../components/Nav.astro';
+import BaseHead from '../../../components/Head/BaseHead.astro';
+import BlogPost from '../../../components/BlogPost.astro';
+import { getCollection } from "astro:content";
+
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const paths = posts.map((entry: any) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+  return paths;
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const {title, description} = entry.data;
+---
+<html lang={'en' }>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <Nav />
+    <main class="py-12 lg:py-20">
+      <BlogPost title={title}>
+        <Content />
+      </BlogPost>
+    </main>
+  </body>
+</html>
+
