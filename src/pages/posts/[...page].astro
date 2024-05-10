@@ -12,7 +12,7 @@ export async function getStaticPaths({ paginate }) {
   const sortedPosts = await getCollection('blog');
 
   return paginate(sortedPosts, {
-    pageSize: 3
+    pageSize: 6
   })
 }
 
