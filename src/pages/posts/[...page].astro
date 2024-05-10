@@ -1,25 +1,25 @@
 ---
-import BaseHead from '../../../components/Head/BaseHead.astro';
-import Nav from '../../../components/Nav.astro';
-import HomeHeader from '../../../components/HomeHeader.astro';
-import Card from '../../../components/Card.astro';
-import Footer from '../../../components/Footer/Footer.astro'
-import Paginator from '../../../components/Paginator.astro'
+import BaseHead from '../../components/Head/BaseHead.astro';
+import Nav from '../../components/Nav.astro';
+import HomeHeader from '../../components/HomeHeader.astro';
+import Card from '../../components/Card.astro';
+import Footer from '../../components/Footer/Footer.astro'
+import Paginator from '../../components/Paginator.astro'
 import { getCollection } from "astro:content";
+import { SITE } from '../../config';
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await getCollection("blog");
-  const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.pubDatetime).valueOf() - new Date(a.frontmatter.pubDatetime).valueOf());
+  const sortedPosts = await getCollection('blog');
 
   return paginate(sortedPosts, {
-    pageSize: 5
+    pageSize: 21
   })
 }
 
 const { page } = Astro.props
 let pageTitle = 'Articles';
 let pageDescription = `page ${page.currentPage} of all articles`;
-let seoTitle = 'Articles | Creek';
+let seoTitle = 'Articles | ' + SITE.title;
 let seoDescription = '';
 ---
 
