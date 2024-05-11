@@ -4,6 +4,7 @@ export const SITE = {
     website: `https://${websiteDetails.url}/`,
     domain: websiteDetails.url,
     font: websiteDetails.font || "Montserrat",
+    cf: websiteDetails.cf,
     analyticsEnabled: websiteDetails.analyticsEnabled,
     desc: websiteDetails.description,
     title: websiteDetails.name,

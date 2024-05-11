@@ -1,5 +1,6 @@
 ---
 import '../../styles/main.scss'
+import { SITE } from '../../config';
 
 export interface Props {
   title: string;
@@ -41,3 +42,11 @@ const permalink = Astro.url.pathname;
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Poppins:ital,wght@0,400;0,600;1,400;1,700&display=swap" rel="stylesheet">
+
+{SITE.analyticsEnabled && (
+     <script
+           defer
+           data-domain={SITE.cf.name}
+           src="https://plausible.io/js/script.js"
+         />
+)}
