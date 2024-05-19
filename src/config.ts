@@ -5,6 +5,7 @@ export const SITE = {
     domain: websiteDetails.url,
     font: websiteDetails.font || "Montserrat",
     cf: websiteDetails.cf,
+    footer: websiteDetails.footer,
     analyticsEnabled: websiteDetails.analyticsEnabled,
     desc: websiteDetails.description,
     title: websiteDetails.name,

@@ -2,11 +2,10 @@
 import Squiggle from './Squiggle.astro'
 import Social from './Social.astro'
 import { SITE } from '../../config'
-const currentYear = new Date().getFullYear();
 ---
 
 <footer class="py-6 lg:py-12 text-center">
-  <div class="text-sm" data-test="footer-text">&copy;{currentYear} {SITE.title}</div>
+  <div class="text-sm" data-test="footer-text" set:html={SITE.footer || `Powered by <a href="https://wordsmith.studio">Wordsmith Studio</a>`} />
 </footer>
 
 <Squiggle />
